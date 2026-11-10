@@ -110,7 +110,7 @@ python -m json.tool data/demo_tasks.json >/dev/null
 python -m pytest -q
 ```
 
-The test command should finish with all tests passing (73 tests covering configuration, orchestration, quality gates, approval, memory, adaptation, engine, optimization, tools, and LLM backends).
+The test command should finish with all tests passing.
 
 ### 3.3 Run the end-to-end demonstration
 
@@ -131,7 +131,7 @@ The demo uses an in-memory store (`persist=False`) so repeated verification runs
 
 ### 3.4 Fast reproduction with the checked-in static corpus
 
-After the virtual environment has been created and dependencies installed, reviewers can run this primary reproduction path. It always uses the checked-in 12-task corpus, so every reviewer starts from identical task inputs:
+After the virtual environment has been created and dependencies installed, you can run this primary reproduction path. It always uses the checked-in 12-task corpus, so every user starts from identical task inputs:
 
 ```bash
 source .venv/bin/activate
