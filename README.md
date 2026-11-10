@@ -8,6 +8,7 @@ Due to strict enterprise non-disclosure agreements (NDA), the real EnterpriseDev
 
 - The complete source code of the MSEF core framework;
 - A **checked-in static demonstration corpus** (`data/demo_tasks.json`) with 12 realistic enterprise development tasks;
+- A **synthetic data generator** (`tools/generate_synthetic_data.py`) that produces custom-sized task corpora mimicking the statistical distribution of the enterprise dataset;
 - A `SimulatedBackend` that lets reviewers run the entire pipeline offline without any paid API keys.
 
 While the absolute numerical values reported in the manuscript are based on real data, this repository faithfully reproduces the *core logic* of the paper: the quality gates, the failure-rollback mechanism, and the three-tier memory system.
