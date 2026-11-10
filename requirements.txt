@@ -1,0 +1,12 @@
+# MSEF core dependencies: Python 3.9 + PyTorch
+torch>=2.0.1
+numpy>=1.23
+
+# Optional: semantic encoder (three-tier memory, Sentence-BERT all-MiniLM-L6-v2, 384-dim)
+# sentence-transformers>=2.2.0
+
+# Optional: real LLM integration (OpenAI-compatible API gateway)
+# openai>=1.0.0
+
+# Testing
+pytest>=7.0

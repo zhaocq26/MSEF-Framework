@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "msef"
+version = "0.1.0"
+description = "MSEF: An LLM Agent-Driven Multi-Stage Execution Framework for Enterprise Software Engineering"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "MSEF Team" }]
+license = { text = "Apache-2.0" }
+dependencies = [
+    "torch>=2.0.1",
+    "numpy>=1.23",
+]
+
+[project.optional-dependencies]
+# Optional semantic encoder: enables Sentence-BERT (all-MiniLM-L6-v2) for memory
+encoder = ["sentence-transformers>=2.2.0"]
+# Real LLM integration (OpenAI-compatible API)
+llm = ["openai>=1.0.0"]
+dev = ["pytest>=7.0", "pytest-cov>=4.0"]
+
+[tool.setuptools.packages.find]
+include = ["msef*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-q"
