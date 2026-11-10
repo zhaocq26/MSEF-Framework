@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 venv/
 .pytest_cache/
+.pip-cache/
 .coverage
 htmlcov/
 build/
@@ -13,6 +14,5 @@ dist/
 .idea/
 .vscode/
 # Runtime-generated data
-data/
 runs/
 *.sqlite3

@@ -1,0 +1,1493 @@
+[
+  {
+    "task_id": "F009",
+    "type": "feature",
+    "title": "Payment Gateway capability expansion",
+    "description": "Implement expose a versioned REST endpoint for the payment gateway service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/payments/routes.py",
+      "clients/payments_client.py",
+      "docs/payments/runbook.md",
+      "services/payments/api.py",
+      "services/payments/metrics.py",
+      "services/payments/models.py",
+      "services/payments/repository.py",
+      "services/payments/service.py",
+      "services/payments/worker.py",
+      "tests/integration/test_payments_workflow.py",
+      "tests/payments/test_repository.py"
+    ],
+    "required_risks": [
+      "latency regression",
+      "retry duplication",
+      "rollback readiness"
+    ],
+    "complexity": 0.68,
+    "exact_match": 1,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F005",
+    "type": "feature",
+    "title": "Notification Delivery capability expansion",
+    "description": "Implement implement request validation for the notification delivery service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/notifications/routes.py",
+      "clients/notifications_client.py",
+      "docs/notifications/runbook.md",
+      "services/notifications/api.py",
+      "services/notifications/events.py",
+      "services/notifications/handler.py",
+      "services/notifications/metrics.py",
+      "services/notifications/models.py",
+      "services/notifications/repository.py",
+      "services/notifications/service.py",
+      "services/notifications/settings.py",
+      "tests/notifications/test_api.py",
+      "tests/notifications/test_repository.py"
+    ],
+    "required_risks": [
+      "backward compatibility",
+      "latency regression",
+      "rollback readiness"
+    ],
+    "complexity": 0.73,
+    "exact_match": 1,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F002",
+    "type": "feature",
+    "title": "Tenant Billing capability expansion",
+    "description": "Implement introduce idempotency keys for the tenant billing service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/billing/routes.py",
+      "api/billing/schemas.py",
+      "deploy/billing/deployment.yaml",
+      "services/billing/api.py",
+      "services/billing/events.py",
+      "services/billing/handler.py",
+      "services/billing/metrics.py",
+      "services/billing/models.py",
+      "services/billing/repository.py",
+      "services/billing/worker.py",
+      "tests/billing/test_repository.py",
+      "tests/billing/test_service.py",
+      "tests/integration/test_billing_workflow.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "latency regression",
+      "retry duplication"
+    ],
+    "complexity": 0.51,
+    "exact_match": 1,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "B001",
+    "type": "bugfix",
+    "title": "Tenant Billing reliability correction",
+    "description": "Fix connection leakage under load in the tenant billing service and add regression coverage for concurrent requests, retry paths, and production-safe rollback.",
+    "avg_subtasks": 4.1,
+    "avg_changed_files": 5.2,
+    "affected_files": [
+      "services/billing/handler.py",
+      "services/billing/repository.py",
+      "tests/integration/test_billing_workflow.py"
+    ],
+    "required_risks": [
+      "data consistency",
+      "observability gaps",
+      "rollback safety"
+    ],
+    "complexity": 0.81,
+    "exact_match": 1,
+    "profile": "good",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F018",
+    "type": "feature",
+    "title": "Order Tracking capability expansion",
+    "description": "Implement add asynchronous retry handling for the order tracking service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/orders/routes.py",
+      "deploy/orders/deployment.yaml",
+      "services/orders/events.py",
+      "services/orders/handler.py",
+      "services/orders/metrics.py",
+      "services/orders/models.py",
+      "services/orders/repository.py",
+      "services/orders/service.py",
+      "services/orders/settings.py",
+      "services/orders/worker.py",
+      "tests/integration/test_orders_workflow.py",
+      "tests/orders/test_repository.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "retry duplication",
+      "rollback readiness"
+    ],
+    "complexity": 0.7,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F003",
+    "type": "feature",
+    "title": "Audit Event Export capability expansion",
+    "description": "Implement add a Redis-backed cache for the audit event export service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "clients/audit_client.py",
+      "deploy/audit/deployment.yaml",
+      "services/audit/api.py",
+      "services/audit/handler.py",
+      "services/audit/models.py",
+      "services/audit/repository.py",
+      "services/audit/service.py",
+      "services/audit/settings.py",
+      "tests/audit/test_repository.py"
+    ],
+    "required_risks": [
+      "latency regression",
+      "rollback readiness",
+      "tenant isolation"
+    ],
+    "complexity": 0.82,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "B010",
+    "type": "bugfix",
+    "title": "Order Tracking reliability correction",
+    "description": "Fix missing authorization enforcement on a fallback path in the order tracking service and add regression coverage for concurrent requests, retry paths, and production-safe rollback.",
+    "avg_subtasks": 4.1,
+    "avg_changed_files": 5.2,
+    "affected_files": [
+      "api/orders/routes.py",
+      "api/orders/schemas.py",
+      "clients/orders_client.py",
+      "services/orders/models.py",
+      "services/orders/service.py"
+    ],
+    "required_risks": [
+      "customer impact during rollout",
+      "observability gaps",
+      "regression coverage"
+    ],
+    "complexity": 0.74,
+    "exact_match": 0,
+    "profile": "good",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "B005",
+    "type": "bugfix",
+    "title": "Payment Gateway reliability correction",
+    "description": "Fix missing authorization enforcement on a fallback path in the payment gateway service and add regression coverage for concurrent requests, retry paths, and production-safe rollback.",
+    "avg_subtasks": 4.1,
+    "avg_changed_files": 5.2,
+    "affected_files": [
+      "deploy/payments/deployment.yaml",
+      "services/payments/metrics.py",
+      "services/payments/models.py",
+      "services/payments/service.py",
+      "services/payments/settings.py",
+      "services/payments/worker.py"
+    ],
+    "required_risks": [
+      "data consistency",
+      "regression coverage",
+      "retry behavior"
+    ],
+    "complexity": 0.49,
+    "exact_match": 1,
+    "profile": "good",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F007",
+    "type": "feature",
+    "title": "Audit Event Export capability expansion",
+    "description": "Implement add tenant-scoped rate limiting for the audit event export service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/audit/schemas.py",
+      "deploy/audit/deployment.yaml",
+      "docs/audit/runbook.md",
+      "services/audit/api.py",
+      "services/audit/handler.py",
+      "services/audit/metrics.py",
+      "services/audit/repository.py",
+      "services/audit/service.py",
+      "services/audit/settings.py",
+      "tests/audit/test_api.py",
+      "tests/audit/test_repository.py",
+      "tests/audit/test_service.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "latency regression",
+      "tenant isolation"
+    ],
+    "complexity": 0.49,
+    "exact_match": 0,
+    "profile": "good",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "B014",
+    "type": "bugfix",
+    "title": "Inventory Reservation reliability correction",
+    "description": "Fix stale reads after an asynchronous update in the inventory reservation service and add regression coverage for concurrent requests, retry paths, and production-safe rollback.",
+    "avg_subtasks": 4.1,
+    "avg_changed_files": 5.2,
+    "affected_files": [
+      "api/inventory/routes.py",
+      "services/inventory/api.py",
+      "services/inventory/handler.py",
+      "services/inventory/settings.py",
+      "services/inventory/worker.py"
+    ],
+    "required_risks": [
+      "data consistency",
+      "retry behavior",
+      "rollback safety"
+    ],
+    "complexity": 0.75,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F006",
+    "type": "feature",
+    "title": "Notification Delivery capability expansion",
+    "description": "Implement add a Redis-backed cache for the notification delivery service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/notifications/routes.py",
+      "api/notifications/schemas.py",
+      "clients/notifications_client.py",
+      "deploy/notifications/deployment.yaml",
+      "docs/notifications/runbook.md",
+      "services/notifications/api.py",
+      "services/notifications/events.py",
+      "services/notifications/handler.py",
+      "services/notifications/repository.py",
+      "services/notifications/service.py",
+      "services/notifications/settings.py",
+      "services/notifications/worker.py",
+      "tests/integration/test_notifications_workflow.py",
+      "tests/notifications/test_api.py",
+      "tests/notifications/test_repository.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "retry duplication",
+      "rollback readiness"
+    ],
+    "complexity": 0.54,
+    "exact_match": 0,
+    "profile": "medium",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F010",
+    "type": "feature",
+    "title": "Customer Support Case Routing capability expansion",
+    "description": "Implement introduce idempotency keys for the customer support case routing service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/support/routes.py",
+      "api/support/schemas.py",
+      "deploy/support/deployment.yaml",
+      "services/support/api.py",
+      "services/support/events.py",
+      "services/support/handler.py",
+      "services/support/metrics.py",
+      "services/support/repository.py",
+      "services/support/service.py",
+      "services/support/worker.py",
+      "tests/integration/test_support_workflow.py",
+      "tests/support/test_api.py",
+      "tests/support/test_repository.py",
+      "tests/support/test_service.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "backward compatibility",
+      "tenant isolation"
+    ],
+    "complexity": 0.48,
+    "exact_match": 0,
+    "profile": "good",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "B006",
+    "type": "bugfix",
+    "title": "Payment Gateway reliability correction",
+    "description": "Fix missing authorization enforcement on a fallback path in the payment gateway service and add regression coverage for concurrent requests, retry paths, and production-safe rollback.",
+    "avg_subtasks": 4.1,
+    "avg_changed_files": 5.2,
+    "affected_files": [
+      "api/payments/routes.py",
+      "services/payments/api.py",
+      "services/payments/handler.py",
+      "services/payments/metrics.py",
+      "tests/payments/test_api.py",
+      "tests/payments/test_service.py"
+    ],
+    "required_risks": [
+      "customer impact during rollout",
+      "data consistency",
+      "observability gaps"
+    ],
+    "complexity": 0.65,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F025",
+    "type": "feature",
+    "title": "Customer Support Case Routing capability expansion",
+    "description": "Implement add asynchronous retry handling for the customer support case routing service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/support/routes.py",
+      "clients/support_client.py",
+      "deploy/support/deployment.yaml",
+      "docs/support/runbook.md",
+      "services/support/metrics.py",
+      "services/support/models.py",
+      "services/support/repository.py",
+      "services/support/service.py",
+      "services/support/settings.py",
+      "services/support/worker.py",
+      "tests/integration/test_support_workflow.py",
+      "tests/support/test_api.py",
+      "tests/support/test_repository.py",
+      "tests/support/test_service.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "backward compatibility",
+      "rollback readiness"
+    ],
+    "complexity": 0.54,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "R003",
+    "type": "refactor",
+    "title": "Payment Gateway boundary refactoring",
+    "description": "Refactor the payment gateway service to introduce a provider-neutral adapter interface, preserving public contracts, observability, and an incremental migration path.",
+    "avg_subtasks": 6.7,
+    "avg_changed_files": 18.4,
+    "affected_files": [
+      "clients/payments_client.py",
+      "deploy/payments/deployment.yaml",
+      "docs/payments/runbook.md",
+      "events/payments_schema.py",
+      "services/payments/adapters.py",
+      "services/payments/contracts.py",
+      "services/payments/handler.py",
+      "services/payments/metrics.py",
+      "services/payments/migration.py",
+      "services/payments/settings.py",
+      "services/payments/worker.py",
+      "tests/contract/test_payments_compatibility.py",
+      "tests/integration/test_payments_workflow.py",
+      "tests/payments/test_api.py",
+      "tests/payments/test_repository.py",
+      "tests/payments/test_service.py"
+    ],
+    "required_risks": [
+      "deployment sequencing",
+      "rollback compatibility",
+      "schema migration"
+    ],
+    "complexity": 0.79,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F026",
+    "type": "feature",
+    "title": "Audit Event Export capability expansion",
+    "description": "Implement implement request validation for the audit event export service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/audit/schemas.py",
+      "docs/audit/runbook.md",
+      "services/audit/api.py",
+      "services/audit/events.py",
+      "services/audit/handler.py",
+      "services/audit/models.py",
+      "services/audit/repository.py",
+      "tests/audit/test_api.py",
+      "tests/audit/test_repository.py",
+      "tests/audit/test_service.py",
+      "tests/integration/test_audit_workflow.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "rollback readiness",
+      "tenant isolation"
+    ],
+    "complexity": 0.86,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F012",
+    "type": "feature",
+    "title": "Customer Support Case Routing capability expansion",
+    "description": "Implement implement request validation for the customer support case routing service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/support/routes.py",
+      "api/support/schemas.py",
+      "deploy/support/deployment.yaml",
+      "docs/support/runbook.md",
+      "services/support/api.py",
+      "services/support/events.py",
+      "services/support/metrics.py",
+      "services/support/models.py",
+      "services/support/service.py",
+      "services/support/settings.py",
+      "services/support/worker.py",
+      "tests/integration/test_support_workflow.py",
+      "tests/support/test_api.py",
+      "tests/support/test_repository.py",
+      "tests/support/test_service.py"
+    ],
+    "required_risks": [
+      "backward compatibility",
+      "retry duplication",
+      "rollback readiness"
+    ],
+    "complexity": 0.49,
+    "exact_match": 1,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "R002",
+    "type": "refactor",
+    "title": "Customer Support Case Routing boundary refactoring",
+    "description": "Refactor the customer support case routing service to consolidate duplicated configuration loading behind typed settings, preserving public contracts, observability, and an incremental migration path.",
+    "avg_subtasks": 6.7,
+    "avg_changed_files": 18.4,
+    "affected_files": [
+      "api/support/routes.py",
+      "api/support/schemas.py",
+      "clients/support_client.py",
+      "deploy/support/deployment.yaml",
+      "events/support_codec.py",
+      "events/support_schema.py",
+      "services/support/adapters.py",
+      "services/support/api.py",
+      "services/support/handler.py",
+      "services/support/metrics.py",
+      "services/support/migration.py",
+      "services/support/models.py",
+      "services/support/repository.py",
+      "services/support/service.py",
+      "services/support/settings.py",
+      "services/support/worker.py",
+      "tests/contract/test_support_compatibility.py",
+      "tests/integration/test_support_workflow.py",
+      "tests/support/test_api.py",
+      "tests/support/test_repository.py",
+      "tests/support/test_service.py"
+    ],
+    "required_risks": [
+      "consumer compatibility",
+      "deployment sequencing",
+      "schema migration"
+    ],
+    "complexity": 0.79,
+    "exact_match": 0,
+    "profile": "medium",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "B013",
+    "type": "bugfix",
+    "title": "Order Tracking reliability correction",
+    "description": "Fix lost events during consumer rebalancing in the order tracking service and add regression coverage for concurrent requests, retry paths, and production-safe rollback.",
+    "avg_subtasks": 4.1,
+    "avg_changed_files": 5.2,
+    "affected_files": [
+      "api/orders/schemas.py",
+      "clients/orders_client.py",
+      "deploy/orders/deployment.yaml",
+      "services/orders/metrics.py",
+      "tests/orders/test_service.py"
+    ],
+    "required_risks": [
+      "customer impact during rollout",
+      "data consistency",
+      "regression coverage"
+    ],
+    "complexity": 0.65,
+    "exact_match": 1,
+    "profile": "good",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F015",
+    "type": "feature",
+    "title": "Payment Gateway capability expansion",
+    "description": "Implement implement request validation for the payment gateway service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "docs/payments/runbook.md",
+      "services/payments/api.py",
+      "services/payments/events.py",
+      "services/payments/handler.py",
+      "services/payments/metrics.py",
+      "services/payments/repository.py",
+      "services/payments/service.py",
+      "services/payments/settings.py",
+      "services/payments/worker.py",
+      "tests/integration/test_payments_workflow.py",
+      "tests/payments/test_api.py",
+      "tests/payments/test_repository.py"
+    ],
+    "required_risks": [
+      "backward compatibility",
+      "rollback readiness",
+      "tenant isolation"
+    ],
+    "complexity": 0.73,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "B007",
+    "type": "bugfix",
+    "title": "Audit Event Export reliability correction",
+    "description": "Fix missing authorization enforcement on a fallback path in the audit event export service and add regression coverage for concurrent requests, retry paths, and production-safe rollback.",
+    "avg_subtasks": 4.1,
+    "avg_changed_files": 5.2,
+    "affected_files": [
+      "deploy/audit/deployment.yaml",
+      "services/audit/handler.py",
+      "tests/audit/test_repository.py",
+      "tests/audit/test_service.py"
+    ],
+    "required_risks": [
+      "observability gaps",
+      "regression coverage",
+      "retry behavior"
+    ],
+    "complexity": 0.79,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "B015",
+    "type": "bugfix",
+    "title": "Customer Support Case Routing reliability correction",
+    "description": "Fix connection leakage under load in the customer support case routing service and add regression coverage for concurrent requests, retry paths, and production-safe rollback.",
+    "avg_subtasks": 4.1,
+    "avg_changed_files": 5.2,
+    "affected_files": [
+      "clients/support_client.py",
+      "services/support/api.py",
+      "services/support/handler.py",
+      "tests/integration/test_support_workflow.py",
+      "tests/support/test_api.py",
+      "tests/support/test_service.py"
+    ],
+    "required_risks": [
+      "customer impact during rollout",
+      "data consistency",
+      "retry behavior"
+    ],
+    "complexity": 0.55,
+    "exact_match": 1,
+    "profile": "medium",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F028",
+    "type": "feature",
+    "title": "Customer Support Case Routing capability expansion",
+    "description": "Implement add a Redis-backed cache for the customer support case routing service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/support/schemas.py",
+      "clients/support_client.py",
+      "docs/support/runbook.md",
+      "services/support/api.py",
+      "services/support/events.py",
+      "services/support/handler.py",
+      "services/support/metrics.py",
+      "services/support/models.py",
+      "services/support/repository.py",
+      "services/support/service.py",
+      "services/support/settings.py",
+      "services/support/worker.py",
+      "tests/support/test_api.py",
+      "tests/support/test_repository.py",
+      "tests/support/test_service.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "latency regression",
+      "retry duplication"
+    ],
+    "complexity": 0.72,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "B003",
+    "type": "bugfix",
+    "title": "Inventory Reservation reliability correction",
+    "description": "Fix duplicate processing after retry in the inventory reservation service and add regression coverage for concurrent requests, retry paths, and production-safe rollback.",
+    "avg_subtasks": 4.1,
+    "avg_changed_files": 5.2,
+    "affected_files": [
+      "api/inventory/routes.py",
+      "clients/inventory_client.py",
+      "services/inventory/events.py",
+      "services/inventory/handler.py",
+      "services/inventory/models.py"
+    ],
+    "required_risks": [
+      "customer impact during rollout",
+      "regression coverage",
+      "rollback safety"
+    ],
+    "complexity": 0.68,
+    "exact_match": 1,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "R004",
+    "type": "refactor",
+    "title": "Payment Gateway boundary refactoring",
+    "description": "Refactor the payment gateway service to consolidate duplicated configuration loading behind typed settings, preserving public contracts, observability, and an incremental migration path.",
+    "avg_subtasks": 6.7,
+    "avg_changed_files": 18.4,
+    "affected_files": [
+      "api/payments/routes.py",
+      "api/payments/schemas.py",
+      "clients/payments_client.py",
+      "deploy/payments/deployment.yaml",
+      "docs/payments/runbook.md",
+      "events/payments_codec.py",
+      "events/payments_schema.py",
+      "services/payments/adapters.py",
+      "services/payments/contracts.py",
+      "services/payments/events.py",
+      "services/payments/handler.py",
+      "services/payments/metrics.py",
+      "services/payments/migration.py",
+      "services/payments/repository.py",
+      "services/payments/settings.py",
+      "services/payments/worker.py",
+      "tests/contract/test_payments_compatibility.py",
+      "tests/integration/test_payments_workflow.py",
+      "tests/payments/test_api.py"
+    ],
+    "required_risks": [
+      "consumer compatibility",
+      "deployment sequencing",
+      "service discovery"
+    ],
+    "complexity": 0.94,
+    "exact_match": 1,
+    "profile": "good",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "B002",
+    "type": "bugfix",
+    "title": "Customer Support Case Routing reliability correction",
+    "description": "Fix connection leakage under load in the customer support case routing service and add regression coverage for concurrent requests, retry paths, and production-safe rollback.",
+    "avg_subtasks": 4.1,
+    "avg_changed_files": 5.2,
+    "affected_files": [
+      "clients/support_client.py",
+      "services/support/api.py",
+      "services/support/handler.py",
+      "services/support/models.py",
+      "tests/support/test_service.py"
+    ],
+    "required_risks": [
+      "customer impact during rollout",
+      "observability gaps",
+      "rollback safety"
+    ],
+    "complexity": 0.51,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F004",
+    "type": "feature",
+    "title": "Payment Gateway capability expansion",
+    "description": "Implement add tenant-scoped rate limiting for the payment gateway service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/payments/routes.py",
+      "api/payments/schemas.py",
+      "clients/payments_client.py",
+      "deploy/payments/deployment.yaml",
+      "docs/payments/runbook.md",
+      "services/payments/api.py",
+      "services/payments/events.py",
+      "services/payments/handler.py",
+      "services/payments/metrics.py",
+      "services/payments/models.py",
+      "services/payments/repository.py",
+      "services/payments/service.py",
+      "services/payments/settings.py",
+      "tests/payments/test_api.py",
+      "tests/payments/test_service.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "latency regression",
+      "tenant isolation"
+    ],
+    "complexity": 0.79,
+    "exact_match": 1,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F021",
+    "type": "feature",
+    "title": "Order Tracking capability expansion",
+    "description": "Implement expose a versioned REST endpoint for the order tracking service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/orders/routes.py",
+      "deploy/orders/deployment.yaml",
+      "docs/orders/runbook.md",
+      "services/orders/api.py",
+      "services/orders/events.py",
+      "services/orders/handler.py",
+      "services/orders/metrics.py",
+      "services/orders/models.py",
+      "services/orders/service.py",
+      "services/orders/settings.py",
+      "services/orders/worker.py",
+      "tests/orders/test_api.py"
+    ],
+    "required_risks": [
+      "latency regression",
+      "retry duplication",
+      "rollback readiness"
+    ],
+    "complexity": 0.51,
+    "exact_match": 1,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F024",
+    "type": "feature",
+    "title": "Customer Support Case Routing capability expansion",
+    "description": "Implement add asynchronous retry handling for the customer support case routing service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/support/routes.py",
+      "clients/support_client.py",
+      "deploy/support/deployment.yaml",
+      "docs/support/runbook.md",
+      "services/support/events.py",
+      "services/support/handler.py",
+      "services/support/metrics.py",
+      "services/support/models.py",
+      "services/support/repository.py",
+      "services/support/service.py",
+      "services/support/settings.py",
+      "services/support/worker.py",
+      "tests/integration/test_support_workflow.py",
+      "tests/support/test_api.py",
+      "tests/support/test_repository.py",
+      "tests/support/test_service.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "backward compatibility",
+      "retry duplication"
+    ],
+    "complexity": 0.53,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "B012",
+    "type": "bugfix",
+    "title": "User Login reliability correction",
+    "description": "Fix incorrect timezone handling at a reporting boundary in the user login service and add regression coverage for concurrent requests, retry paths, and production-safe rollback.",
+    "avg_subtasks": 4.1,
+    "avg_changed_files": 5.2,
+    "affected_files": [
+      "docs/identity/runbook.md",
+      "services/identity/events.py",
+      "services/identity/metrics.py",
+      "services/identity/repository.py",
+      "tests/identity/test_repository.py"
+    ],
+    "required_risks": [
+      "observability gaps",
+      "regression coverage",
+      "retry behavior"
+    ],
+    "complexity": 0.85,
+    "exact_match": 1,
+    "profile": "medium",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "B011",
+    "type": "bugfix",
+    "title": "Inventory Reservation reliability correction",
+    "description": "Fix connection leakage under load in the inventory reservation service and add regression coverage for concurrent requests, retry paths, and production-safe rollback.",
+    "avg_subtasks": 4.1,
+    "avg_changed_files": 5.2,
+    "affected_files": [
+      "api/inventory/routes.py",
+      "deploy/inventory/deployment.yaml",
+      "services/inventory/metrics.py",
+      "services/inventory/repository.py"
+    ],
+    "required_risks": [
+      "data consistency",
+      "retry behavior",
+      "rollback safety"
+    ],
+    "complexity": 0.67,
+    "exact_match": 0,
+    "profile": "good",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F022",
+    "type": "feature",
+    "title": "Payment Gateway capability expansion",
+    "description": "Implement add asynchronous retry handling for the payment gateway service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/payments/schemas.py",
+      "clients/payments_client.py",
+      "deploy/payments/deployment.yaml",
+      "docs/payments/runbook.md",
+      "services/payments/api.py",
+      "services/payments/handler.py",
+      "services/payments/models.py",
+      "services/payments/repository.py",
+      "tests/integration/test_payments_workflow.py",
+      "tests/payments/test_api.py",
+      "tests/payments/test_repository.py",
+      "tests/payments/test_service.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "retry duplication",
+      "rollback readiness"
+    ],
+    "complexity": 0.64,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F013",
+    "type": "feature",
+    "title": "Tenant Billing capability expansion",
+    "description": "Implement add asynchronous retry handling for the tenant billing service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/billing/schemas.py",
+      "clients/billing_client.py",
+      "deploy/billing/deployment.yaml",
+      "docs/billing/runbook.md",
+      "services/billing/metrics.py",
+      "services/billing/models.py",
+      "services/billing/repository.py",
+      "services/billing/service.py",
+      "services/billing/settings.py",
+      "services/billing/worker.py",
+      "tests/billing/test_api.py",
+      "tests/billing/test_service.py",
+      "tests/integration/test_billing_workflow.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "latency regression",
+      "tenant isolation"
+    ],
+    "complexity": 0.64,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F001",
+    "type": "feature",
+    "title": "Payment Gateway capability expansion",
+    "description": "Implement introduce idempotency keys for the payment gateway service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/payments/schemas.py",
+      "docs/payments/runbook.md",
+      "services/payments/api.py",
+      "services/payments/handler.py",
+      "services/payments/metrics.py",
+      "services/payments/models.py",
+      "services/payments/service.py",
+      "services/payments/settings.py",
+      "tests/integration/test_payments_workflow.py",
+      "tests/payments/test_repository.py"
+    ],
+    "required_risks": [
+      "backward compatibility",
+      "latency regression",
+      "rollback readiness"
+    ],
+    "complexity": 0.74,
+    "exact_match": 0,
+    "profile": "good",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F016",
+    "type": "feature",
+    "title": "Customer Support Case Routing capability expansion",
+    "description": "Implement introduce idempotency keys for the customer support case routing service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/support/routes.py",
+      "api/support/schemas.py",
+      "clients/support_client.py",
+      "deploy/support/deployment.yaml",
+      "services/support/handler.py",
+      "services/support/metrics.py",
+      "services/support/repository.py",
+      "services/support/service.py",
+      "services/support/settings.py",
+      "tests/support/test_api.py",
+      "tests/support/test_repository.py",
+      "tests/support/test_service.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "retry duplication",
+      "rollback readiness"
+    ],
+    "complexity": 0.61,
+    "exact_match": 1,
+    "profile": "medium",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F008",
+    "type": "feature",
+    "title": "Payment Gateway capability expansion",
+    "description": "Implement add a Redis-backed cache for the payment gateway service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/payments/routes.py",
+      "api/payments/schemas.py",
+      "deploy/payments/deployment.yaml",
+      "services/payments/handler.py",
+      "services/payments/metrics.py",
+      "services/payments/models.py",
+      "services/payments/repository.py",
+      "services/payments/service.py",
+      "tests/payments/test_api.py",
+      "tests/payments/test_repository.py",
+      "tests/payments/test_service.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "latency regression",
+      "retry duplication"
+    ],
+    "complexity": 0.65,
+    "exact_match": 0,
+    "profile": "medium",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "B009",
+    "type": "bugfix",
+    "title": "Payment Gateway reliability correction",
+    "description": "Fix incorrect timezone handling at a reporting boundary in the payment gateway service and add regression coverage for concurrent requests, retry paths, and production-safe rollback.",
+    "avg_subtasks": 4.1,
+    "avg_changed_files": 5.2,
+    "affected_files": [
+      "api/payments/routes.py",
+      "services/payments/metrics.py",
+      "services/payments/service.py",
+      "services/payments/settings.py",
+      "tests/payments/test_api.py"
+    ],
+    "required_risks": [
+      "observability gaps",
+      "regression coverage",
+      "retry behavior"
+    ],
+    "complexity": 0.66,
+    "exact_match": 0,
+    "profile": "medium",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "R001",
+    "type": "refactor",
+    "title": "Inventory Reservation boundary refactoring",
+    "description": "Refactor the inventory reservation service to split the monolithic workflow into independently deployable modules, preserving public contracts, observability, and an incremental migration path.",
+    "avg_subtasks": 6.7,
+    "avg_changed_files": 18.4,
+    "affected_files": [
+      "api/inventory/routes.py",
+      "api/inventory/schemas.py",
+      "clients/inventory_client.py",
+      "deploy/inventory/deployment.yaml",
+      "docs/inventory/runbook.md",
+      "events/inventory_codec.py",
+      "services/inventory/adapters.py",
+      "services/inventory/api.py",
+      "services/inventory/events.py",
+      "services/inventory/metrics.py",
+      "services/inventory/migration.py",
+      "services/inventory/repository.py",
+      "services/inventory/service.py",
+      "services/inventory/worker.py",
+      "tests/contract/test_inventory_compatibility.py"
+    ],
+    "required_risks": [
+      "deployment sequencing",
+      "schema migration",
+      "service discovery"
+    ],
+    "complexity": 0.64,
+    "exact_match": 0,
+    "profile": "medium",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F020",
+    "type": "feature",
+    "title": "Inventory Reservation capability expansion",
+    "description": "Implement add tenant-scoped rate limiting for the inventory reservation service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/inventory/routes.py",
+      "api/inventory/schemas.py",
+      "clients/inventory_client.py",
+      "docs/inventory/runbook.md",
+      "services/inventory/events.py",
+      "services/inventory/handler.py",
+      "services/inventory/metrics.py",
+      "services/inventory/models.py",
+      "services/inventory/repository.py",
+      "services/inventory/service.py",
+      "services/inventory/worker.py",
+      "tests/inventory/test_repository.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "backward compatibility",
+      "retry duplication"
+    ],
+    "complexity": 0.5,
+    "exact_match": 1,
+    "profile": "medium",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "R005",
+    "type": "refactor",
+    "title": "Order Tracking boundary refactoring",
+    "description": "Refactor the order tracking service to consolidate duplicated configuration loading behind typed settings, preserving public contracts, observability, and an incremental migration path.",
+    "avg_subtasks": 6.7,
+    "avg_changed_files": 18.4,
+    "affected_files": [
+      "api/orders/schemas.py",
+      "deploy/orders/deployment.yaml",
+      "docs/orders/runbook.md",
+      "events/orders_codec.py",
+      "events/orders_schema.py",
+      "services/orders/api.py",
+      "services/orders/contracts.py",
+      "services/orders/handler.py",
+      "services/orders/metrics.py",
+      "services/orders/models.py",
+      "services/orders/settings.py",
+      "tests/contract/test_orders_compatibility.py",
+      "tests/integration/test_orders_workflow.py",
+      "tests/orders/test_api.py",
+      "tests/orders/test_repository.py"
+    ],
+    "required_risks": [
+      "deployment sequencing",
+      "performance regression",
+      "service discovery"
+    ],
+    "complexity": 0.65,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F023",
+    "type": "feature",
+    "title": "Customer Support Case Routing capability expansion",
+    "description": "Implement implement request validation for the customer support case routing service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/support/routes.py",
+      "api/support/schemas.py",
+      "clients/support_client.py",
+      "deploy/support/deployment.yaml",
+      "docs/support/runbook.md",
+      "services/support/api.py",
+      "services/support/events.py",
+      "services/support/handler.py",
+      "services/support/metrics.py",
+      "services/support/repository.py",
+      "services/support/service.py",
+      "services/support/settings.py",
+      "tests/integration/test_support_workflow.py",
+      "tests/support/test_api.py",
+      "tests/support/test_repository.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "backward compatibility",
+      "retry duplication"
+    ],
+    "complexity": 0.59,
+    "exact_match": 0,
+    "profile": "medium",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F011",
+    "type": "feature",
+    "title": "Audit Event Export capability expansion",
+    "description": "Implement add tenant-scoped rate limiting for the audit event export service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/audit/routes.py",
+      "api/audit/schemas.py",
+      "deploy/audit/deployment.yaml",
+      "services/audit/events.py",
+      "services/audit/handler.py",
+      "services/audit/metrics.py",
+      "services/audit/models.py",
+      "services/audit/repository.py",
+      "tests/audit/test_api.py",
+      "tests/audit/test_repository.py",
+      "tests/integration/test_audit_workflow.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "retry duplication",
+      "tenant isolation"
+    ],
+    "complexity": 0.52,
+    "exact_match": 1,
+    "profile": "medium",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F029",
+    "type": "feature",
+    "title": "Inventory Reservation capability expansion",
+    "description": "Implement add a Redis-backed cache for the inventory reservation service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/inventory/routes.py",
+      "api/inventory/schemas.py",
+      "clients/inventory_client.py",
+      "services/inventory/api.py",
+      "services/inventory/events.py",
+      "services/inventory/handler.py",
+      "services/inventory/metrics.py",
+      "services/inventory/service.py",
+      "services/inventory/settings.py",
+      "tests/inventory/test_repository.py",
+      "tests/inventory/test_service.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "rollback readiness",
+      "tenant isolation"
+    ],
+    "complexity": 0.78,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "B008",
+    "type": "bugfix",
+    "title": "Order Tracking reliability correction",
+    "description": "Fix incorrect timezone handling at a reporting boundary in the order tracking service and add regression coverage for concurrent requests, retry paths, and production-safe rollback.",
+    "avg_subtasks": 4.1,
+    "avg_changed_files": 5.2,
+    "affected_files": [
+      "api/orders/routes.py",
+      "services/orders/events.py",
+      "services/orders/handler.py",
+      "services/orders/service.py",
+      "services/orders/settings.py",
+      "services/orders/worker.py"
+    ],
+    "required_risks": [
+      "data consistency",
+      "regression coverage",
+      "retry behavior"
+    ],
+    "complexity": 0.56,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F014",
+    "type": "feature",
+    "title": "Payment Gateway capability expansion",
+    "description": "Implement add tenant-scoped rate limiting for the payment gateway service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/payments/routes.py",
+      "api/payments/schemas.py",
+      "docs/payments/runbook.md",
+      "services/payments/api.py",
+      "services/payments/events.py",
+      "services/payments/handler.py",
+      "services/payments/repository.py",
+      "services/payments/service.py",
+      "services/payments/settings.py",
+      "tests/integration/test_payments_workflow.py",
+      "tests/payments/test_api.py",
+      "tests/payments/test_repository.py",
+      "tests/payments/test_service.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "backward compatibility",
+      "retry duplication"
+    ],
+    "complexity": 0.56,
+    "exact_match": 0,
+    "profile": "good",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F017",
+    "type": "feature",
+    "title": "Notification Delivery capability expansion",
+    "description": "Implement add a Redis-backed cache for the notification delivery service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/notifications/routes.py",
+      "clients/notifications_client.py",
+      "deploy/notifications/deployment.yaml",
+      "docs/notifications/runbook.md",
+      "services/notifications/api.py",
+      "services/notifications/metrics.py",
+      "services/notifications/models.py",
+      "services/notifications/service.py",
+      "services/notifications/settings.py",
+      "services/notifications/worker.py",
+      "tests/notifications/test_api.py",
+      "tests/notifications/test_repository.py",
+      "tests/notifications/test_service.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "latency regression",
+      "retry duplication"
+    ],
+    "complexity": 0.55,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F027",
+    "type": "feature",
+    "title": "Notification Delivery capability expansion",
+    "description": "Implement introduce idempotency keys for the notification delivery service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/notifications/routes.py",
+      "clients/notifications_client.py",
+      "docs/notifications/runbook.md",
+      "services/notifications/events.py",
+      "services/notifications/handler.py",
+      "services/notifications/metrics.py",
+      "services/notifications/repository.py",
+      "services/notifications/service.py",
+      "services/notifications/settings.py",
+      "tests/notifications/test_api.py",
+      "tests/notifications/test_repository.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "latency regression",
+      "retry duplication"
+    ],
+    "complexity": 0.6,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F019",
+    "type": "feature",
+    "title": "Customer Support Case Routing capability expansion",
+    "description": "Implement expose a versioned REST endpoint for the customer support case routing service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/support/routes.py",
+      "api/support/schemas.py",
+      "clients/support_client.py",
+      "docs/support/runbook.md",
+      "services/support/api.py",
+      "services/support/events.py",
+      "services/support/handler.py",
+      "services/support/metrics.py",
+      "services/support/models.py",
+      "services/support/service.py",
+      "services/support/worker.py",
+      "tests/integration/test_support_workflow.py",
+      "tests/support/test_api.py",
+      "tests/support/test_repository.py",
+      "tests/support/test_service.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "retry duplication",
+      "rollback readiness"
+    ],
+    "complexity": 0.62,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "F030",
+    "type": "feature",
+    "title": "User Login capability expansion",
+    "description": "Implement add tenant-scoped rate limiting for the user login service while preserving tenant isolation, operational observability, and a documented rollback path.",
+    "avg_subtasks": 8.3,
+    "avg_changed_files": 12.7,
+    "affected_files": [
+      "api/identity/schemas.py",
+      "clients/identity_client.py",
+      "deploy/identity/deployment.yaml",
+      "docs/identity/runbook.md",
+      "services/identity/api.py",
+      "services/identity/events.py",
+      "services/identity/metrics.py",
+      "services/identity/models.py",
+      "services/identity/repository.py",
+      "services/identity/settings.py",
+      "tests/identity/test_api.py",
+      "tests/identity/test_repository.py",
+      "tests/integration/test_identity_workflow.py"
+    ],
+    "required_risks": [
+      "authorization bypass",
+      "latency regression",
+      "rollback readiness"
+    ],
+    "complexity": 0.83,
+    "exact_match": 0,
+    "profile": "hard",
+    "generation_seed": 2026
+  },
+  {
+    "task_id": "B004",
+    "type": "bugfix",
+    "title": "Notification Delivery reliability correction",
+    "description": "Fix incorrect timezone handling at a reporting boundary in the notification delivery service and add regression coverage for concurrent requests, retry paths, and production-safe rollback.",
+    "avg_subtasks": 4.1,
+    "avg_changed_files": 5.2,
+    "affected_files": [
+      "clients/notifications_client.py",
+      "services/notifications/handler.py",
+      "tests/integration/test_notifications_workflow.py",
+      "tests/notifications/test_service.py"
+    ],
+    "required_risks": [
+      "observability gaps",
+      "regression coverage",
+      "rollback safety"
+    ],
+    "complexity": 0.79,
+    "exact_match": 0,
+    "profile": "medium",
+    "generation_seed": 2026
+  }
+]
